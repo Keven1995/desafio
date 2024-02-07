@@ -59,7 +59,8 @@ services:
 
 ## Acesso à Aplicação Web:
 
-Acesse a aplicação web em http://localhost para visualizar os dados expostos pela página PHP.
+Acesse a aplicação web em http://localhost:80 para visualizar os dados expostos pela página PHP.
+Acesse a aplicação node em http://localhost:3000/produtos para visualizar os dados em formato JSON.
 
 # Observações:
 Certifique-se de substituir sua_senha_root, nome_do_banco, seu_usuario e sua_senha_usuario por informações adequadas no arquivo docker-compose.yml.
