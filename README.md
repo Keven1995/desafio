@@ -1,4 +1,4 @@
-## Este guia fornece instruções para configurar um ambiente de trabalho utilizando Docker, incluindo a criação de containers para um banco de dados, Node.js e PHP. Será configurada a persistência de dados, a criação de um banco de dados e uma tabela, além de populá-la com dados. O Node.js será programado para buscar esses dados e o PHP será utilizado para expor o conteúdo em uma página web.
+### Este guia fornece instruções para configurar um ambiente de trabalho utilizando Docker, incluindo a criação de containers para um banco de dados, Node.js e PHP. Será configurada a persistência de dados, a criação de um banco de dados e uma tabela, além de populá-la com dados. O Node.js será programado para buscar esses dados e o PHP será utilizado para expor o conteúdo em uma página web.
 
 # Requisitos:
 
