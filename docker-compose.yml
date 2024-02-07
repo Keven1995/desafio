@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./Mysql:/docker-entrypoint-initdb.d
+    ports:
+      - "3307:3307"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      timeout: 10s
+      retries: 10
+    networks:
+      - mercado_default
+
+  app:
+    build: ./Node
+    ports:
+      - "3000:3000"
+
+    env_file:
+      - ./.env
+    depends_on:
+      db:
+        condition: service_healthy
+    extra_hosts:
+      - "app:127.0.0.1"
+    networks:
+      - mercado_default
+    
+
+  web:
+    build: ./Php
+    ports:
+      - "80:80"
+    depends_on:
+      - app
+    networks:
+      - mercado_default
+
+volumes:
+  db_data: {}
+
+networks:
+  mercado_default:
+    driver: bridge
