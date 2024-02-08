@@ -2,7 +2,9 @@
 
 # Requisitos:
 
-Docker instalado no ambiente de trabalho. instalar um .env com as seguintes credenciais:
+Docker instalado no ambiente de trabalho. 
+
+Instalar um .env com as seguintes credenciais:
 
     MYSQL_ROOT_PASSWORD=(senha do banco)
     MYSQL_DATABASE=(nome do banco)
