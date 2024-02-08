@@ -49,7 +49,7 @@ services:
 
 - Criação da Aplicação Node.js: Dentro do diretório app, crie um arquivo index.js e adicione o código para conectar ao banco e buscar dados.
 
-- Criação da Página PHP: Crie uma página index.php também no diretório app para exibir os dados obtidos pelo Node.js.
+- Criação da Página PHP: Crie uma página index.php no diretório Php para exibir os dados obtidos pelo Node.js.
 
 - Persistência de Dados: A persistência de dados está configurada no volume mysql_data, garantindo que os dados do MySQL sejam mantidos mesmo após a parada dos containers.
 
