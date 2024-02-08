@@ -4,7 +4,7 @@
 
 Docker instalado no ambiente de trabalho. instalar um .env com as seguintes credenciais:
 
-    MYSQL_ROOT_PASSWORD=(senha)
+    MYSQL_ROOT_PASSWORD=(senha do banco)
     MYSQL_DATABASE=(nome do banco)
 
 # Clone o Repositório:
