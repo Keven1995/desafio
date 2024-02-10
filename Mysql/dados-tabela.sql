@@ -6,6 +6,6 @@ INSERT INTO produtos(nome, valor) VALUES
 ("Frango", 12.99),
 ("biscoito de sal", 3.99),
 ("biscoito recheado", 4.99),
-("lava louças", 2.99),
+("Veja", 2.99),
 ("Po de cafe", 15.99),
 ("Suco", 3.99);

@@ -1,51 +1,48 @@
 version: '3.8'
 
 services:
+  # Serviço de banco de dados MySQL
   db:
-    image: mysql:5.7
+    image: mysql:5.7.44
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} # Senha do root do MySQL
+      MYSQL_DATABASE: ${MYSQL_DATABASE} # Nome do banco de dados
     volumes:
-      - db_data:/var/lib/mysql
-      - ./Mysql:/docker-entrypoint-initdb.d
-    ports:
-      - "3307:3307"
+      - db_data:/var/lib/mysql # Volume para persistir dados do banco de dados
+      - ./Mysql:/docker-entrypoint-initdb.d # Pasta para scripts de inicialização do banco de dados
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      test: ["CMD-SHELL", "mysqladmin ping -h db -u root -p${MYSQL_ROOT_PASSWORD}"] # Verificação de saúde do MySQL
       timeout: 10s
       retries: 10
     networks:
-      - mercado_default
+      - mercado_network
 
+  # Serviço da aplicação Node.js
   app:
-    build: ./Node
+    build: ./Node # Diretório contendo o Dockerfile para a construção da imagem
     ports:
-      - "3000:3000"
-
+      - "3000:3000" # Mapeamento de porta para acessar a aplicação
     env_file:
-      - ./.env
+      - ./.env # Arquivo contendo variáveis de ambiente
     depends_on:
       db:
-        condition: service_healthy
-    extra_hosts:
-      - "app:127.0.0.1"
+        condition: service_healthy # Garante que o serviço de banco de dados esteja saudável antes de iniciar a aplicação
     networks:
-      - mercado_default
+      - mercado_network
     
-
+  # Serviço da aplicação PHP (web)
   web:
-    build: ./Php
+    build: ./Php # Diretório contendo o Dockerfile para a construção da imagem
     ports:
-      - "80:80"
+      - "80:80" # Mapeamento de porta para acessar a aplicação web
     depends_on:
-      - app
+      - app # Garante que a aplicação Node.js esteja pronta antes de iniciar a aplicação web
     networks:
-      - mercado_default
+      - mercado_network
 
 volumes:
-  db_data: {}
+  db_data: {} # Definição do volume para persistência de dados do MySQL
 
 networks:
-  mercado_default:
-    driver: bridge
+  mercado_network:
+    driver: bridge # Configuração da rede Docker
